@@ -22,3 +22,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.log
+
+# one-off helper used when the git transport to github.com is unreachable
+assets-src/push_via_api.mjs
