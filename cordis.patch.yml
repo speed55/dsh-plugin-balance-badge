@@ -1,0 +1,19 @@
+# balance-badge bundle patch: inserts one dual-face row.
+#
+# The Host half (exports ".") declares the live preferences; the `dsh.client`
+# declaration in package.json loads the browser half, which renders the sidebar
+# footer badge, the spend notice, and the Settings -> General rows.
+#
+# The row id doubles as the settings namespace the browser reads with
+# `ctx.configForms.get('balance-badge')`.
+- insert:
+    - id: balance-badge
+      name: dsh-plugin-balance-badge
+      config:
+        showBalance: true
+        spendNotice: true
+        noticeStep: 5
+        rainDensity: 0
+        soundNotice: true
+        soundSample: reward
+        refreshSeconds: 60

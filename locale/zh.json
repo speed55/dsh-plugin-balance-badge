@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "账户余额徽标",
+    "description": "在侧边栏底部、设置上方显示当前登录账户的余额，开关在「设置 → 通用」中。",
+    "detail": "docs/DETAIL.md"
+  }
+}

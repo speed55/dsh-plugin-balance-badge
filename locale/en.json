@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Account balance badge",
+    "description": "Shows the signed-in DeepSeek account balance above Settings in the sidebar, with a switch in Settings > General.",
+    "detail": "docs/DETAIL.md"
+  }
+}
