@@ -1,66 +1,66 @@
-﻿{
-    "name":  "@speed55/dsh-plugin-balance-badge",
-    "version":  "1.0.0",
-    "type":  "module",
-    "description":  "DeepSeek Harness plugin: shows the account balance in the sidebar and plays a money-rain notice with a coin sound on every spending threshold.",
-    "license":  "MIT",
-    "author":  "speed55 \u003c15720615753@163.com\u003e",
-    "keywords":  [
-                     "dsh-plugin",
-                     "deepseek-harness",
-                     "balance",
-                     "sidebar",
-                     "coin-sound"
-                 ],
-    "repository":  {
-                       "type":  "git",
-                       "url":  "git+https://github.com/speed55/dsh-plugin-balance-badge.git"
-                   },
-    "homepage":  "https://github.com/speed55/dsh-plugin-balance-badge#readme",
-    "bugs":  {
-                 "url":  "https://github.com/speed55/dsh-plugin-balance-badge/issues"
-             },
-    "publishConfig":  {
-                          "access":  "public"
-                      },
-    "exports":  {
-                    ".":  "./index.js",
-                    "./client":  "./client.js",
-                    "./locale/*.json":  "./locale/*.json",
-                    "./icon":  "./icon.svg"
-                },
-    "files":  [
-                  "index.js",
-                  "client.js",
-                  "cordis.patch.yml",
-                  "locale/*.json",
-                  "docs",
-                  "icon.svg",
-                  "assets-src/*.py",
-                  "assets-src/embed_samples.mjs",
-                  "assets-src/source/README.md",
-                  "NOTICE.md"
-              ],
-    "scripts":  {
-                    "embed":  "node assets-src/embed_samples.mjs"
-                },
-    "dependencies":  {
-                         "@deepseek-ai/schemastery":  "~3.19.0"
-                     },
-    "dsh":  {
-                "engines":  {
-                                "dsh":  "\u003e=0.2.2-rc.5"
-                            },
-                "bundle":  {
-                               "patch":  "./cordis.patch.yml"
-                           },
-                "client":  {
-                               "platform":  "web",
-                               "immediately":  true,
-                               "inject":  [
-                                              "@deepseek-ai/dsh-client-ui-sidebar",
-                                              "@deepseek-ai/dsh-client-ui-settings"
-                                          ]
-                           }
-            }
+{
+  "name": "@speed55/dsh-plugin-balance-badge",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "DeepSeek Harness plugin: shows the account balance in the sidebar and plays a money-rain notice with a coin sound on every spending threshold.",
+  "license": "MIT",
+  "author": "speed55 <15720615753@163.com>",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "balance",
+    "sidebar",
+    "coin-sound"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/speed55/dsh-plugin-balance-badge.git"
+  },
+  "homepage": "https://github.com/speed55/dsh-plugin-balance-badge#readme",
+  "bugs": {
+    "url": "https://github.com/speed55/dsh-plugin-balance-badge/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "docs",
+    "icon.svg",
+    "assets-src/*.py",
+    "assets-src/embed_samples.mjs",
+    "assets-src/source/README.md",
+    "NOTICE.md"
+  ],
+  "scripts": {
+    "embed": "node assets-src/embed_samples.mjs"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "~3.19.0"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.2-rc.5"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  }
 }
