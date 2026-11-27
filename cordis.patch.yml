@@ -13,6 +13,7 @@
         showBalance: true
         spendNotice: true
         noticeStep: 5
+        effect: rain
         rainDensity: 0
         soundNotice: true
         soundSample: reward

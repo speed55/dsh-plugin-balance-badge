@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Account balance badge",
-    "description": "Shows the signed-in DeepSeek account balance above Settings in the sidebar, with a switch in Settings > General.",
+    "description": "Shows the signed-in DeepSeek account balance above Settings in the sidebar, with its switch in Settings > General. Every time spending crosses a threshold it plays a full-frame notice: falling money, or a suited character robbing the cash register.",
     "detail": "docs/DETAIL.md"
   }
 }

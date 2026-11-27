@@ -21,6 +21,8 @@ export const Config = z.object({
   spendNotice: z.boolean().default(true).volatile(),
   /** Money spent between two notices, in the wallet's own currency. */
   noticeStep: z.number().default(5).min(0.01).max(1000).volatile(),
+  /** Which notice effect plays when a threshold is crossed. */
+  effect: z.union(['rain', 'cashier']).default('rain').volatile(),
   /** How many coins and bills the rain drops, from sparse (0) to dense (100). */
   rainDensity: z.number().default(0).min(0).max(100).volatile(),
   /** Whether the notice also plays the coin sound. */

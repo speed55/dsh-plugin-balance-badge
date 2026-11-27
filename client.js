@@ -73,6 +73,9 @@ window.__ModuleLoader__.load({
       'settings.densitySparse': 'Sparse',
       'settings.densityDense': 'Dense',
       'settings.densityCount': '{count} pieces',
+      'settings.effectLabel': 'Effect',
+      'settings.effectRain': 'Money rain',
+      'settings.effectCashier': 'Cashier',
       'flash.preview': 'Preview',
       'settings.preview': 'Preview',
       'flash.away': 'While you were away',
@@ -118,6 +121,9 @@ window.__ModuleLoader__.load({
       'settings.densitySparse': '稀疏',
       'settings.densityDense': '密集',
       'settings.densityCount': '{count} 张',
+      'settings.effectLabel': '动效',
+      'settings.effectRain': '撒钱',
+      'settings.effectCashier': '收银柜',
       'flash.preview': '预览',
       'settings.preview': '预览',
       'flash.away': '离开期间',
@@ -413,10 +419,142 @@ window.__ModuleLoader__.load({
   78% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+/* ---- effect B: the suited character and the cash register ---- */
+.bb-cashier { position: absolute; inset: 0; pointer-events: none; }
+.bb-cashier-dim {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 380px 280px at 50% 58%,
+    rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.42) 68%, rgba(0, 0, 0, 0.52) 100%);
+  opacity: 0;
+  animation: bb-dim 3400ms ease both;
+}
+@keyframes bb-dim {
+  0%, 6% { opacity: 0; }
+  16% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.bb-stage {
+  position: absolute; left: 50%; top: 55%;
+  width: 560px; height: 300px;
+  margin-left: -280px; margin-top: -150px;
+  animation: bb-stage 3400ms linear both;
+}
+@keyframes bb-stage {
+  0% { opacity: 0; }
+  7% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.bb-register {
+  position: absolute; right: 40px; bottom: 32px;
+  width: 118px; height: 92px;
+  z-index: 1;
+}
+.bb-register svg { display: block; width: 100%; height: 100%; }
+.bb-drawer {
+  position: absolute; right: 44px; bottom: 44px;
+  width: 106px; height: 42px;
+  z-index: 2;
+  will-change: transform;
+}
+.bb-drawer-box {
+  position: absolute; inset: 0;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #d4d9df, #b6bcc4);
+  box-shadow: inset 0 0 0 1.5px #8f969e, 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+.bb-drawer-inner {
+  position: absolute; inset: 6px;
+  border-radius: 3px;
+  background: #7d848c;
+}
+.bb-drawer-note {
+  position: absolute; left: 10px; right: 10px; height: 12px;
+  border-radius: 1.5px;
+  background: #ecd6a9;
+  box-shadow: inset 0 0 0 1px #b99a60;
+  transition: opacity 120ms linear;
+}
+.bb-arm-layer {
+  position: absolute; left: 232px; bottom: 32px;
+  width: 130px; height: 178px;
+  z-index: 1;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+.bb-guy {
+  position: absolute; left: 232px; bottom: 32px;
+  width: 130px; height: 178px;
+  z-index: 3;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+.bb-guy svg, .bb-guy-leg svg, .bb-guy-head svg, .bb-guy-arm svg {
+  display: block; width: 100%; height: 100%;
+}
+.bb-guy-leg {
+  position: absolute; top: 126px;
+  width: 16px; height: 50px;
+  transform-origin: 50% 0%;
+}
+.bb-guy-leg-l { left: 50px; }
+.bb-guy-leg-r { left: 66px; }
+.bb-guy-head {
+  position: absolute; left: 47px; top: 36px;
+  width: 36px; height: 40px;
+  transform-origin: 50% 95%;
+}
+.bb-guy-arm {
+  position: absolute; left: 84px; top: 84px;
+  width: 12px; height: 58px;
+  transform-origin: 50% 3px;
+}
+.bb-guy-sack {
+  position: absolute; left: 10px; top: 126px;
+  width: 54px; height: 54px;
+  transform-origin: 50% 8%;
+  will-change: transform;
+}
+.bb-note-hold {
+  position: absolute; left: -31px; top: 34px;
+  width: 74px; height: 24px;
+  opacity: 0;
+  will-change: opacity;
+}
+.bb-note-face {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #f2e2bd, #e3c99a);
+  box-shadow: inset 0 0 0 1px #b99a60;
+  color: #7c5d22; font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums;
+}
+.bb-total {
+  position: absolute; left: 50%; top: -12px;
+  transform: translateX(-50%);
+  font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums;
+  color: var(--dsw-alias-state-warn-primary);
+  text-shadow: 0 2px 0 var(--dsw-alias-bg-base), 0 12px 34px rgba(0, 0, 0, 0.3);
+  animation: bb-total 3400ms ease both;
+}
+@keyframes bb-total {
+  0%, 46% { opacity: 0; transform: translate(-50%, 6px); }
+  54% { opacity: 1; transform: translate(-50%, 0); }
+  88% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -8px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bb-rain-piece, .bb-flash-ring, .bb-flash-wash { display: none; }
   .bb-flash-center { animation: bb-flash-fade 2400ms ease both; }
   .bb-chip-pulse { animation: none; }
+  /* The cashier story still plays: it is one short, opt-in event, and this
+     machine reports reduced motion, so freezing it would hide the effect. */
+  .bb-cashier-dim { animation: none; opacity: 0.4; }
+  .bb-stage { animation: bb-flash-fade 3400ms ease both; }
+  .bb-total { animation: bb-flash-fade 3400ms ease both; }
 }
 `
 
@@ -541,6 +679,16 @@ window.__ModuleLoader__.load({
     function rainPieces(density) {
       const value = Math.min(100, Math.max(0, Number(density) || 0))
       return Math.round(12 + (value / 100) * 138)
+    }
+
+    /**
+     * Map the density preference to how many notes the character pockets.
+     * @param density - 0 (one note) to 100 (five notes).
+     * @returns note count between 1 and 5.
+     */
+    function noteCountFor(density) {
+      const value = Math.min(100, Math.max(0, Number(density) || 0))
+      return Math.max(1, Math.min(5, 1 + Math.round(value / 25)))
     }
 
     /**
@@ -737,8 +885,9 @@ window.__ModuleLoader__.load({
        * @param buffer - the decoded recording.
        * @param steps - number of thresholds the notice reports.
        */
-      const playSample = (audio, buffer, steps) => {
-        const now = audio.currentTime + 0.01
+      const playSample = (audio, buffer, steps, delay) => {
+        const offset = Number.isFinite(delay) ? Math.max(0, delay) : 0
+        const now = audio.currentTime + 0.01 + offset
         const layers = steps > 1 ? 2 : 1
         for (let index = 0; index < layers; index += 1) {
           const rate = index === 0 ? 0.97 + Math.random() * 0.06 : 0.92 + Math.random() * 0.18
@@ -776,28 +925,70 @@ window.__ModuleLoader__.load({
          * @param key - `reward` or `drop`.
          * @param steps - number of thresholds the notice reports.
          */
-        play: (key, steps) => {
+        play: (key, steps, delay) => {
           const audio = ensure()
           if (audio === null) return
           const selected = key === 'drop' ? 'drop' : 'reward'
           const ready = buffers.get(selected)
           if (ready !== undefined) {
-            playSample(audio, ready, steps)
+            playSample(audio, ready, steps, delay)
             return
           }
           void decode(audio, selected).then((buffer) => {
             if (disposed) return
             if (buffer !== null && buffer !== undefined) {
-              playSample(audio, buffer, steps)
+              playSample(audio, buffer, steps, delay)
               return
             }
             const spare = selected === 'reward' ? 'drop' : 'reward'
             void decode(audio, spare).then((other) => {
               if (disposed) return
-              if (other !== null && other !== undefined) playSample(audio, other, steps)
+              if (other !== null && other !== undefined) playSample(audio, other, steps, delay)
               else synth(audio, steps)
             })
           })
+        },
+        /**
+         * A short synthesized "pop" for the register drawer, so the cashier
+         * effect needs no extra audio asset.
+         * @param delay - seconds from now; defaults to 0.
+         */
+        pop: (delay) => {
+          const audio = ensure()
+          if (audio === null) return
+          const offset = Number.isFinite(delay) ? Math.max(0, delay) : 0
+          const when = audio.currentTime + 0.01 + offset
+          try {
+            const thump = audio.createOscillator()
+            thump.type = 'sine'
+            thump.frequency.setValueAtTime(185, when)
+            thump.frequency.exponentialRampToValueAtTime(70, when + 0.09)
+            const envelope = audio.createGain()
+            envelope.gain.setValueAtTime(0.0001, when)
+            envelope.gain.exponentialRampToValueAtTime(0.5, when + 0.005)
+            envelope.gain.exponentialRampToValueAtTime(0.0001, when + 0.12)
+            thump.connect(envelope)
+            envelope.connect(master)
+            thump.start(when)
+            thump.stop(when + 0.14)
+
+            const click = audio.createBufferSource()
+            click.buffer = noiseBuffer
+            const filter = audio.createBiquadFilter()
+            filter.type = 'bandpass'
+            filter.frequency.value = 2600
+            filter.Q.value = 0.9
+            const clickGain = audio.createGain()
+            clickGain.gain.setValueAtTime(0.32, when)
+            clickGain.gain.exponentialRampToValueAtTime(0.0001, when + 0.05)
+            click.connect(filter)
+            filter.connect(clickGain)
+            clickGain.connect(master)
+            click.start(when)
+            click.stop(when + 0.06)
+          } catch (error) {
+            // A unavailable graph just means a silent drawer.
+          }
         },
         /** Close the graph; the notice is muted from then on. */
         dispose: () => {
@@ -1155,6 +1346,17 @@ window.__ModuleLoader__.load({
             h('div', { className: 'bb-setting-title' }, t('settings.spendTitle')),
             h('div', { className: 'bb-setting-description' }, t('settings.spendDescription')),
             h('div', { className: 'bb-step-controls' },
+              h('span', { className: 'bb-step-unit' }, t('settings.effectLabel')),
+              ...[['rain', 'settings.effectRain'], ['cashier', 'settings.effectCashier']].map(entry => h('button', {
+                key: 'effect-' + entry[0],
+                type: 'button',
+                className: 'bb-step-chip',
+                'aria-pressed': preference.effect === entry[0],
+                disabled,
+                onClick: () => { run(() => props.setEffect(entry[0])) },
+              }, t(entry[1]))),
+            ),
+            h('div', { className: 'bb-step-controls' },
               h('span', { className: 'bb-step-unit' }, t('settings.stepLabel')),
               ...presets.map(value => h('button', {
                 key: 'step-' + value,
@@ -1253,6 +1455,338 @@ window.__ModuleLoader__.load({
     }
 
     /**
+     * Static art for the torso, the left arm and the briefcase. Legs, the reaching
+     * arm and the head are separate HTML boxes so each can be driven on its own.
+     * @returns an SVG sized to the 130 x 178 box.
+     */
+    function CashierTorso() {
+      return h('svg', { viewBox: '0 0 130 178', 'aria-hidden': true },
+        h('path', { d: 'M43 86 Q43 76 53 76 L77 76 Q87 76 87 86 L87 128 L43 128 Z', fill: '#1e3f8f' }),
+        h('path', { d: 'M53 76 L65 98 L58 128 L45 128 Z', fill: '#2f57b5' }),
+        h('path', { d: 'M77 76 L65 98 L72 128 L85 128 Z', fill: '#2f57b5' }),
+        h('rect', { x: 60, y: 76, width: 10, height: 26, fill: '#f3f6fa' }),
+        h('path', { d: 'M62 86 L68 86 L69 94 L65 112 L61 94 Z', fill: '#b3261e' }),
+        h('rect', { x: 33, y: 84, width: 11, height: 50, rx: 5, fill: '#1e3f8f' }),
+        h('circle', { cx: 38, cy: 136, r: 5.5, fill: '#f0c9a8' }),
+      )
+    }
+
+    /**
+     * Static art for the classic money bag: burlap body, tied neck, a currency
+     * symbol on the face and the same abstract whale as a small charm.
+     * @param props - `{ symbol }` with the wallet's currency mark.
+     * @returns an SVG sized to the 54 x 54 box.
+     */
+    function CashierSack(props) {
+      const symbol = props.symbol === '$' ? '$' : '¥'
+      return h('svg', { viewBox: '0 0 54 54', 'aria-hidden': true },
+        h('defs', null,
+          h('radialGradient', { id: 'bb-sack-shade', cx: '0.42', cy: '0.38', r: '0.72' },
+            h('stop', { offset: '0%', stopColor: '#dcbe8c' }),
+            h('stop', { offset: '62%', stopColor: '#c9a267' }),
+            h('stop', { offset: '100%', stopColor: '#a8814a' }),
+          ),
+        ),
+        h('path', {
+          d: 'M20 9 Q27 4 34 9 L34 13 Q27 9 20 13 Z',
+          fill: '#b8935a',
+          stroke: '#8a6a3a',
+          strokeWidth: 1,
+        }),
+        h('path', {
+          d: 'M20 10 Q15 8 12 10',
+          fill: 'none', stroke: '#7a5a2e', strokeWidth: 1.6, strokeLinecap: 'round',
+        }),
+        h('path', {
+          d: 'M27 12 C12 13 4 24 5 35 C6 47 15 52 27 52 C39 52 48 47 49 35 C50 24 42 13 27 12 Z',
+          fill: 'url(#bb-sack-shade)',
+          stroke: '#8a6a3a',
+          strokeWidth: 1.2,
+        }),
+        h('text', {
+          x: 27, y: 39, textAnchor: 'middle',
+          fontSize: 19, fontWeight: 800, fill: '#7a5a2e',
+          fontFamily: 'inherit',
+        }, symbol),
+        h('path', {
+          d: 'M14 47 q4 -3 8 0',
+          fill: 'none', stroke: '#a8814a', strokeWidth: 1.1, strokeLinecap: 'round',
+        }),
+        h('path', {
+          d: 'M40 6 q4 -2 6 1 q-2 3 -5 2 q-2 -1 -1 -3 z',
+          fill: 'none', stroke: '#7a5a2e', strokeWidth: 1.1, strokeLinecap: 'round',
+        }),
+      )
+    }
+
+    /**
+     * Static art for the head: skin, hair and sunglasses.
+     * @returns an SVG sized to the 36 x 40 box.
+     */
+    function CashierHeadArt() {
+      return h('svg', { viewBox: '0 0 36 40', 'aria-hidden': true },
+        h('rect', { x: 14, y: 30, width: 8, height: 10, fill: '#f0c9a8' }),
+        h('circle', { cx: 18, cy: 20, r: 17, fill: '#f0c9a8' }),
+        h('path', { d: 'M1 18 Q2 2 18 2 Q34 2 35 18 Q26 9 18 9 Q10 9 1 18 Z', fill: '#2a2a2a' }),
+        h('rect', { x: 3, y: 14, width: 12, height: 8, rx: 2, fill: '#14181d' }),
+        h('rect', { x: 21, y: 14, width: 12, height: 8, rx: 2, fill: '#14181d' }),
+        h('rect', { x: 15, y: 17, width: 6, height: 2, fill: '#14181d' }),
+      )
+    }
+
+    /**
+     * Static art for one trouser leg and its shoe.
+     * @returns an SVG sized to the 16 x 50 box.
+     */
+    function CashierLegArt() {
+      return h('svg', { viewBox: '0 0 16 50', 'aria-hidden': true },
+        h('rect', { x: 5.5, y: 0, width: 10, height: 42, rx: 4, fill: '#1e3f8f' }),
+        h('rect', { x: 1, y: 42, width: 15, height: 8, rx: 3, fill: '#23262b' }),
+      )
+    }
+
+    /**
+     * Static art for the reaching arm.
+     * @returns an SVG sized to the 12 x 58 box.
+     */
+    function CashierArmArt() {
+      return h('svg', { viewBox: '0 0 12 58', 'aria-hidden': true },
+        h('rect', { x: 1, y: 0, width: 10, height: 46, rx: 5, fill: '#1e3f8f' }),
+        h('circle', { cx: 6, cy: 51, r: 5.5, fill: '#f0c9a8' }),
+      )
+    }
+
+    /**
+     * Static art for the supermarket register: screen, keypad and drawer slot.
+     * @returns an SVG sized to the 118 x 92 box.
+     */
+    function CashierRegister() {
+      return h('svg', { viewBox: '0 0 118 92', 'aria-hidden': true },
+        h('rect', { x: 0, y: 12, width: 118, height: 80, rx: 6, fill: '#cfd3d8', stroke: '#9aa1a9', strokeWidth: 1.5 }),
+        h('rect', { x: 22, y: 2, width: 46, height: 14, rx: 3, fill: '#7fd0b0' }),
+        h('rect', { x: 12, y: 22, width: 94, height: 24, rx: 4, fill: '#565d66' }),
+        ...[0, 1, 2].flatMap(column => [0, 1].map(row => h('rect', {
+          key: 'key-' + column + '-' + row,
+          x: 20 + column * 30,
+          y: 27 + row * 9,
+          width: 20,
+          height: 6,
+          rx: 1.5,
+          fill: '#eaeef2',
+        }))),
+        h('rect', { x: 12, y: 52, width: 94, height: 32, rx: 3, fill: '#b3b9c1' }),
+      )
+    }
+
+    /**
+     * Effect B: a suited character sneaks up to a cash register, pops the drawer
+     * open and pockets banknotes. A requestAnimationFrame loop drives every part
+     * from easing curves plus secondary motion, because CSS keyframes alone looked
+     * rigid. The note rides the reaching arm, and the drawer hides the hand once it
+     * dips in, so the grab reads on screen.
+     * @param props - `{ event }` with the spend payload.
+     * @returns the dim layer plus the animated stage.
+     */
+    function CashierScene(props) {
+      const { event } = props
+      const symbol = event.currency === 'USD' ? '$' : '¥'
+      const unit = Number.isFinite(event.unit) ? event.unit : 0
+      const unitText = symbol + (Number.isInteger(unit) ? String(unit) : unit.toFixed(2))
+      const totalText = formatSpend(event.amount, event.currency)
+      const count = Math.max(1, Math.min(5, Math.round(event.noteCount) || 1))
+      const guyRef = React.useRef(null)
+      const armLayerRef = React.useRef(null)
+      const legLeftRef = React.useRef(null)
+      const legRightRef = React.useRef(null)
+      const headRef = React.useRef(null)
+      const armRef = React.useRef(null)
+      const drawerRef = React.useRef(null)
+      const noteRef = React.useRef(null)
+      const takenNoteRef = React.useRef(null)
+      const sackRef = React.useRef(null)
+
+      React.useEffect(() => {
+        const EASE_OUT = x => 1 - (1 - x) ** 3
+        const EASE_IN = x => x ** 3
+        const EASE_IN_OUT = x => (x < 0.5 ? 2 * x * x : 1 - (-2 * x + 2) ** 2 / 2)
+        const clamp01 = x => Math.max(0, Math.min(1, x))
+        const DURATION = 3.4
+        let raf = 0
+        let started = 0
+
+        const apply = () => {
+          const guy = guyRef.current
+          if (!guy) return
+          const now = performance.now()
+          if (started === 0) started = now
+          const t = Math.min(DURATION, (now - started) / 1000)
+
+          let x = 0
+          let lean = 0
+          let bob = 0
+          let legLeft = 0
+          let legRight = 0
+          let head = 0
+          let armRotate = 0
+          let armStretch = 1
+          let drawer = 0
+          let noteOpacity = 0
+          let flip = 1
+          let sackRotate = 0
+          let sackScale = 1
+
+          if (t < 0.85) {
+            // Sprint in from the right, legs cycling.
+            const p = t / 0.85
+            x = 390 * (1 - EASE_OUT(p))
+            const swing = Math.sin(t * 3.6 * Math.PI * 2)
+            legLeft = 26 * swing
+            legRight = -26 * swing
+            bob = -3 * Math.abs(Math.sin(t * 3.6 * Math.PI))
+            lean = -6 + 3 * swing
+            sackRotate = -swing * 7
+          } else if (t < 1.10) {
+            // Stops, settles, looks both ways.
+            const p = (t - 0.85) / 0.25
+            x = -5 * Math.sin(p * Math.PI) * (1 - p * 0.6)
+            bob = -2.2 * Math.sin(p * Math.PI)
+            head = p < 0.5 ? -16 * Math.sin(p * Math.PI) : 16 * Math.sin((p - 0.5) * Math.PI)
+            legLeft = -4
+            legRight = 4
+          } else if (t < 1.28) {
+            // One tiptoe step closer, lean in.
+            const p = (t - 1.10) / 0.18
+            const eased = EASE_IN_OUT(p)
+            x = 9 * eased
+            lean = 8 * eased
+            const swing = Math.sin(t * 4 * Math.PI * 2)
+            legLeft = 10 * swing
+            legRight = -10 * swing
+            bob = -1.6 * Math.abs(Math.sin(t * 4 * Math.PI))
+            sackRotate = -swing * 4
+          } else if (t < 2.66) {
+            // The take.
+            x = 9
+            lean = 11
+            const open = EASE_OUT(clamp01((t - 1.28) / 0.16))
+            const close = EASE_IN_OUT(clamp01((t - 2.44) / 0.18))
+            const jiggle = t > 1.46 && t < 1.62
+              ? 3.5 * Math.sin((t - 1.46) * 46) * (1 - (t - 1.46) / 0.16)
+              : 0
+            drawer = -74 * open + 74 * close + jiggle
+
+            const reach = clamp01((t - 1.40) / 0.32)
+            const lift = clamp01((t - 1.90) / 0.22)
+            const carry = clamp01((t - 2.30) / 0.18)
+            const retract = clamp01((t - 2.48) / 0.18)
+
+            // 0 -> 55 deg down into the drawer; then up to 18 deg; then across
+            // to the briefcase at -30 deg; finally back to rest.
+            armRotate = 55 * EASE_OUT(reach)
+            armRotate += (18 - 55) * EASE_IN_OUT(lift)
+            armRotate += (-30 - 18) * EASE_IN_OUT(carry)
+            armRotate += (0 - -30) * EASE_IN_OUT(retract)
+            armStretch = 1 + 0.30 * EASE_OUT(reach) - 0.30 * EASE_IN_OUT(lift)
+            if (reach > 0.99 && t < 1.90) {
+              // Tiny probing motion while the hand is inside the drawer.
+              armRotate += Math.sin((t - 1.72) * 20) * 2.2
+            }
+
+            if (t > 1.78) {
+              noteOpacity = Math.min(1, (t - 1.78) / 0.06)
+              if (t > 2.30) noteOpacity *= 1 - clamp01((t - 2.30) / 0.10)
+            }
+            if (t > 1.79) head = 12 * EASE_IN_OUT(clamp01((t - 1.79) / 0.2)) * (1 - clamp01((t - 2.42) / 0.2))
+            sackRotate = 2.5 * Math.sin(t * 5)
+            if (t > 2.42 && t < 2.74) {
+              // The sack swells as the note drops in.
+              const puff = clamp01((t - 2.42) / 0.32)
+              sackScale = 1 + 0.18 * Math.sin(puff * Math.PI)
+            }
+          } else {
+            // Turn on the spot, then sprint out (mirrored) instead of sliding.
+            const turn = clamp01((t - 2.66) / 0.10)
+            flip = 1 - 2 * EASE_IN_OUT(turn)
+            const run = clamp01((t - 2.76) / 0.64)
+            x = 9 + 470 * EASE_IN(run)
+            // The mirror flips rotation too, so a negative lean reads as leaning
+            // forward into a rightward sprint.
+            lean = -7
+            const swing = Math.sin((t - 2.76) * 7 * Math.PI * 2)
+            legLeft = 30 * swing
+            legRight = -30 * swing
+            bob = -4 * Math.abs(Math.sin((t - 2.76) * 7 * Math.PI))
+            head = 6
+            sackRotate = -swing * 9
+          }
+
+          const place = 'translate3d(' + x.toFixed(2) + 'px, ' + bob.toFixed(2) + 'px, 0) rotate(' + lean.toFixed(2) + 'deg) scaleX(' + flip.toFixed(3) + ')'
+          guy.style.transform = place
+          if (armLayerRef.current) armLayerRef.current.style.transform = place
+          if (legLeftRef.current) legLeftRef.current.style.transform = 'rotate(' + legLeft.toFixed(2) + 'deg)'
+          if (legRightRef.current) legRightRef.current.style.transform = 'rotate(' + legRight.toFixed(2) + 'deg)'
+          if (headRef.current) headRef.current.style.transform = 'rotate(' + head.toFixed(2) + 'deg)'
+          if (armRef.current) {
+            armRef.current.style.transform = 'rotate(' + armRotate.toFixed(2) + 'deg) scaleY(' + armStretch.toFixed(3) + ')'
+          }
+          if (drawerRef.current) drawerRef.current.style.transform = 'translateX(' + drawer.toFixed(2) + 'px)'
+          if (sackRef.current) {
+            sackRef.current.style.transform = 'rotate(' + sackRotate.toFixed(2) + 'deg) scale(' + sackScale.toFixed(3) + ')'
+          }
+          if (noteRef.current) noteRef.current.style.opacity = noteOpacity.toFixed(3)
+          if (takenNoteRef.current) takenNoteRef.current.style.opacity = t > 1.79 ? '0' : '1'
+
+          if (t < DURATION) raf = window.requestAnimationFrame(apply)
+        }
+
+        raf = window.requestAnimationFrame(apply)
+        return () => { window.cancelAnimationFrame(raf) }
+      }, [event.seq])
+
+      const drawerNotes = []
+      for (let index = 0; index < count; index += 1) {
+        const top = index === count - 1
+        drawerNotes.push(h('span', {
+          key: 'drawnote-' + index,
+          className: 'bb-drawer-note',
+          ref: top ? takenNoteRef : undefined,
+          style: { bottom: (8 + index * 3) + 'px' },
+        }))
+      }
+
+      return h(React.Fragment, null,
+        h(StyleTag, null),
+        h('div', { className: 'bb-cashier' },
+          h('div', { className: 'bb-cashier-dim' }),
+          h('div', { className: 'bb-stage' },
+            h('div', { className: 'bb-register' }, h(CashierRegister, null)),
+            h('div', { className: 'bb-arm-layer', ref: armLayerRef },
+              h('div', { className: 'bb-guy-arm', ref: armRef },
+                h(CashierArmArt, null),
+                h('div', { className: 'bb-note-hold', ref: noteRef },
+                  h('div', { className: 'bb-note-face' }, unitText),
+                ),
+              ),
+            ),
+            h('div', { className: 'bb-drawer', ref: drawerRef },
+              h('div', { className: 'bb-drawer-box' }),
+              h('div', { className: 'bb-drawer-inner' }),
+              ...drawerNotes,
+            ),
+            h('div', { className: 'bb-guy', ref: guyRef },
+              h('div', { className: 'bb-guy-leg bb-guy-leg-l', ref: legLeftRef }, h(CashierLegArt, null)),
+              h('div', { className: 'bb-guy-leg bb-guy-leg-r', ref: legRightRef }, h(CashierLegArt, null)),
+              h('div', { className: 'bb-guy-head', ref: headRef }, h(CashierHeadArt, null)),
+              h(CashierTorso, null),
+              h('div', { className: 'bb-guy-sack', ref: sackRef }, h(CashierSack, { symbol })),
+            ),
+            h('div', { className: 'bb-total' }, '−' + totalText),
+          ),
+        ),
+      )
+    }
+
+    /**
      * Frame-wide spend notice: the amount punches in over a screen of falling
      * money, played once per event. The visual layer is aria-hidden; a visually
      * hidden live region carries the announcement so a screen reader hears it once.
@@ -1268,7 +1802,8 @@ window.__ModuleLoader__.load({
         if (event.seq === 0 || event.seq === lastSeq.current) return undefined
         lastSeq.current = event.seq
         setPlaying(true)
-        const timer = window.setTimeout(() => { setPlaying(false) }, 2400)
+        const duration = event.effect === 'cashier' ? 3400 : 2400
+        const timer = window.setTimeout(() => { setPlaying(false) }, duration)
         return () => { window.clearTimeout(timer) }
       }, [event.seq])
 
@@ -1288,15 +1823,27 @@ window.__ModuleLoader__.load({
       const hasBalance = typeof event.balance === 'number'
       const hasSpent = typeof event.spent === 'number'
       const balanceText = hasBalance ? formatSpend(event.balance, event.currency) : ''
+      const announcement = hasBalance
+        ? t('flash.announce', { amount, balance: balanceText })
+        : t('flash.preview') + ' ' + amount
+
+      if (event.effect === 'cashier') {
+        return h(React.Fragment, null,
+          h(StyleTag, null),
+          h('div', { className: 'bb-sr-only', role: 'status', 'aria-live': 'polite', 'aria-atomic': true },
+            announcement),
+          h('div', { className: 'bb-flash', 'aria-hidden': true, key: 'flash-' + event.seq },
+            h(CashierScene, { event }),
+          ),
+        )
+      }
+
       const parts = []
       if (event.kind === 'preview') parts.push(t('flash.preview'))
       if (event.kind === 'resume') parts.push(t('flash.away'))
       if (hasBalance) parts.push(t('flash.balance', { balance: balanceText }))
       if (hasSpent) parts.push(t('flash.spent', { spent: formatSpend(event.spent, event.currency) }))
       const subtitle = parts.join(' · ')
-      const announcement = hasBalance
-        ? t('flash.announce', { amount, balance: balanceText })
-        : t('flash.preview') + ' ' + amount
 
       return h(React.Fragment, null,
         h(StyleTag, null),
@@ -1338,6 +1885,7 @@ window.__ModuleLoader__.load({
         show: true,
         spendNotice: true,
         noticeStep: 5,
+        effect: 'rain',
         rainDensity: 0,
         soundNotice: true,
         sample: 'reward',
@@ -1387,9 +1935,17 @@ window.__ModuleLoader__.load({
        * Play the selected recording when the sound preference allows it.
        * @param steps - number of thresholds the notice reports.
        */
-      const playSound = (steps) => {
+      const playSound = (steps, effect) => {
         if (preference.getSnapshot().soundNotice === false) return
-        audio.play(preference.getSnapshot().sample, steps)
+        const sample = preference.getSnapshot().sample
+        if (effect === 'cashier') {
+          // The drawer pops at 1.2 s on the scene timeline; the jingle follows it
+          // so the two never smear together.
+          audio.pop(1.2)
+          audio.play(sample, steps, 1.32)
+          return
+        }
+        audio.play(sample, steps, 0)
       }
 
       /**
@@ -1400,12 +1956,16 @@ window.__ModuleLoader__.load({
         if (preference.getSnapshot().spendNotice === false) return
         if (preference.getSnapshot().show === false) return
         const current = flash.getSnapshot()
+        const effect = preference.getSnapshot().effect
         flash.publish(Object.assign({}, current, payload, {
+          effect,
           rain: rainPieces(preference.getSnapshot().rainDensity),
+          noteCount: noteCountFor(preference.getSnapshot().rainDensity),
+          unit: noticeStepOf(),
           seq: current.seq + 1,
           at: Date.now(),
         }))
-        playSound(payload.steps)
+        playSound(payload.steps, effect)
       }
 
       /**
@@ -1418,18 +1978,22 @@ window.__ModuleLoader__.load({
         const wallet = primaryWallet(snapshot)
         const ready = snapshot.phase === 'ready' && wallet !== undefined && wallet !== null
         const current = flash.getSnapshot()
+        const effect = preference.getSnapshot().effect
         flash.publish(Object.assign({}, current, {
           seq: current.seq + 1,
           kind: 'preview',
+          effect,
           amount: step,
           steps: 1,
           rain: rainPieces(preference.getSnapshot().rainDensity),
+          noteCount: noteCountFor(preference.getSnapshot().rainDensity),
+          unit: step,
           balance: ready ? Number(wallet.balance) : null,
           currency: ready && wallet.currency === 'USD' ? 'USD' : 'CNY',
           spent: ready ? spentTotal : null,
           at: Date.now(),
         }))
-        playSound(1)
+        playSound(1, effect)
       }
 
       /**
@@ -1638,6 +2202,12 @@ window.__ModuleLoader__.load({
         await persist('soundSample', sample)
       }
 
+      const setEffect = async (next) => {
+        const effect = next === 'cashier' ? 'cashier' : 'rain'
+        preference.publish({ effect })
+        await persist('effect', effect)
+      }
+
       const setRainDensity = async (next) => {
         const rainDensity = Math.min(100, Math.max(0, Math.round(Number(next) || 0)))
         preference.publish({ rainDensity })
@@ -1706,19 +2276,20 @@ window.__ModuleLoader__.load({
           const spendNotice = value === null || value === undefined ? true : value.spendNotice !== false
           const soundNotice = value === null || value === undefined ? true : value.soundNotice !== false
           const sample = value !== null && value !== undefined && value.soundSample === 'drop' ? 'drop' : 'reward'
+          const effect = value !== null && value !== undefined && value.effect === 'cashier' ? 'cashier' : 'rain'
           const noticeStep = normalizeStep(value === null || value === undefined ? undefined : value.noticeStep) ?? 5
           const rainDensity = Math.min(100, Math.max(0,
             Math.round(Number(value === null || value === undefined ? 0 : value.rainDensity) || 0)))
           const refreshSeconds = normalizeRefresh(value === null || value === undefined ? undefined : value.refreshSeconds) ?? 60
           const current = preference.getSnapshot()
           if (current.show === show && current.writable === writable && current.spendNotice === spendNotice
-            && current.soundNotice === soundNotice && current.sample === sample
+            && current.soundNotice === soundNotice && current.sample === sample && current.effect === effect
             && current.noticeStep === noticeStep && current.rainDensity === rainDensity
             && current.refreshSeconds === refreshSeconds) return
           const showChanged = current.show !== show
           const refreshChanged = current.refreshSeconds !== refreshSeconds
           preference.publish({
-            show, writable, spendNotice, soundNotice, sample, noticeStep, rainDensity, refreshSeconds,
+            show, writable, spendNotice, soundNotice, sample, effect, noticeStep, rainDensity, refreshSeconds,
           })
           if (showChanged) syncMode()
           else if (refreshChanged && preference.getSnapshot().show !== false) scheduleNext()
@@ -1802,6 +2373,7 @@ window.__ModuleLoader__.load({
           setSpendNotice,
           setSoundNotice,
           setSoundSample,
+          setEffect,
           setNoticeStep,
           setRainDensity,
           setRefreshSeconds,
