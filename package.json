@@ -1,6 +1,6 @@
 {
   "name": "@speed55/dsh-plugin-balance-badge",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "DeepSeek Harness plugin: shows the account balance in the sidebar and plays a money-rain notice with a coin sound on every spending threshold.",
   "license": "MIT",

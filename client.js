@@ -879,7 +879,7 @@ window.__ModuleLoader__.load({
      * @returns the portaled dialog content.
      */
     function BalancePanel(props) {
-      const { t, snapshot, rect, panelRef, refresh, openUsage, hide, onClose } = props
+      const { t, snapshot, rect, panelRef, refresh, openUsage, preview, hide, onClose } = props
       const [busy, setBusy] = React.useState(false)
       const left = Math.min(Math.max(rect.left, 8), Math.max(8, window.innerWidth - PANEL_WIDTH - 8))
       const bottom = Math.max(8, window.innerHeight - rect.top + 8)
@@ -955,6 +955,7 @@ window.__ModuleLoader__.load({
         body,
         h('div', { className: 'bb-rule' }),
         h('div', { className: 'bb-actions' },
+          h('button', { type: 'button', className: 'bb-action', onClick: preview }, t('settings.preview')),
           h('button', { type: 'button', className: 'bb-action', onClick: openUsage }, t('panel.usage')),
           h('button', {
             type: 'button', className: 'bb-action',
@@ -1081,6 +1082,7 @@ window.__ModuleLoader__.load({
             t, snapshot, rect, panelRef,
             refresh: props.refresh,
             openUsage: props.openUsage,
+            preview: props.preview,
             hide: props.hide,
             onClose: () => { setOpen(false) },
           }), document.body)
@@ -1784,6 +1786,7 @@ window.__ModuleLoader__.load({
           hooks: { balance, showBalance: preference, flash },
           refresh: () => read(true),
           openUsage,
+          preview: () => previewNotice(),
           hide: () => setShowBalance(false),
         }),
       }, BalanceChip))
