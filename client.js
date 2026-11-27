@@ -10,7 +10,7 @@
  * account plugin leaves the badge empty instead of throwing during boot.
  */
 window.__ModuleLoader__.load({
-  id: 'dsh-plugin-balance-badge',
+  id: '@speed55/dsh-plugin-balance-badge',
   factory(require) {
     'use strict'
     const React = require('react')

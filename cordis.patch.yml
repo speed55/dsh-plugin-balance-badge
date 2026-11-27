@@ -8,7 +8,7 @@
 # `ctx.configForms.get('balance-badge')`.
 - insert:
     - id: balance-badge
-      name: dsh-plugin-balance-badge
+      name: '@speed55/dsh-plugin-balance-badge'
       config:
         showBalance: true
         spendNotice: true
