@@ -1,5 +1,9 @@
 # dsh-plugin-balance-badge
 
+[![npm version](https://img.shields.io/npm/v/@speed55/dsh-plugin-balance-badge.svg)](https://www.npmjs.com/package/@speed55/dsh-plugin-balance-badge)
+[![npm downloads](https://img.shields.io/npm/dm/@speed55/dsh-plugin-balance-badge.svg)](https://www.npmjs.com/package/@speed55/dsh-plugin-balance-badge)
+[![license](https://img.shields.io/npm/l/@speed55/dsh-plugin-balance-badge.svg)](LICENSE)
+
 DeepSeek Harness 插件：在侧边栏常驻显示 DeepSeek 账户余额，并**每消耗满一个阈值就整屏撒钱 + 金币音效**。
 
 余额直接从 Harness 已登录的账户会话读取（`remote.account.getBalance`），不需要 API key，账户 token 也不会进入浏览器页面。
@@ -43,6 +47,8 @@ DeepSeek Harness 插件：在侧边栏常驻显示 DeepSeek 账户余额，并**
 - **手动装**：侧边栏 → **插件** → 添加插件 → 选择本目录 → 启用。
 
 装好后在 **设置 → 通用** 会多出三行：`显示账户余额`、`消耗提醒`、`消耗音效`；刷新页面后侧边栏底部出现余额徽标。
+
+源码仓库：[speed55/dsh-plugin-balance-badge](https://github.com/speed55/dsh-plugin-balance-badge)（公开，欢迎提 issue / PR）。
 
 ## 设置项
 
@@ -100,9 +106,10 @@ assets-src/          音频处理管线（Python）+ base64 回写脚本，不�
 
 ## Roadmap
 
-- [x] 发布到 npm：`@speed55/dsh-plugin-balance-badge@1.0.0`
-- [x] 音效替换为作者原创素材，仓库可公开发布
-- [ ] 仓库转为 Public（Git 历史里还留着最早那版第三方音频，公开前需先重写历史或重建仓库）
+- [x] 发布到 npm：`@speed55/dsh-plugin-balance-badge`
+- [x] 音效替换为作者原创素材
+- [x] 仓库已公开，历史已重写（不再包含早期那版第三方音频）
+- [ ] GitHub Actions：打 tag 自动发版
 
 ---
 
